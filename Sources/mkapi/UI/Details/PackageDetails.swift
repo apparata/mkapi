@@ -10,7 +10,12 @@ struct PackageDetails: View {
         ScrollView(.vertical) {
             Form {
                 Section("Naming") {
-                    TextField("API Name", text: $model.apiName, prompt: Text("UntitledAPI"))
+                    TextField("Repository Name", text: $model.repositoryName, prompt: Text(model.repositoryNamePrompt))
+                    TextField("Package Name", text: $model.packageName, prompt: Text(model.packageNamePrompt))
+                    TextField("API Name", text: $model.apiName, prompt: Text(model.apiNamePrompt))
+                }
+                Section("Code") {
+                    TextField("Swift Version", text: $model.swiftVersion, prompt: Text("5.10"))
                 }
                 Section("Copyright") {
                     TextField("Copyright Year", text: $model.copyrightYear, prompt: Text(String(Date.currentYear)))
@@ -29,7 +34,7 @@ struct PackageDetails: View {
 #if DEBUG
 
 #Preview {
-    DummyDetails()
+    PackageDetails()
 }
 
 #endif

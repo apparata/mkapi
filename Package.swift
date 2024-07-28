@@ -14,7 +14,7 @@ let package = Package(
         .package(url: "https://github.com/apparata/SystemKit", exact: "1.7.0"),
         .package(url: "https://github.com/apparata/TextToolbox", exact: "1.2.0"),
         .package(url: "https://github.com/apparata/TemplateKit", exact: "0.7.2"),
-        .package(url: "https://github.com/apparata/Constructs", exact: "1.2.0"),
+        //.package(url: "https://github.com/apparata/Constructs", exact: "1.2.0"),
         .package(url: "https://github.com/apparata/CollectionKit", exact: "0.2.2")
     ],
     targets: [
@@ -22,7 +22,9 @@ let package = Package(
             name: "mkapi",
             dependencies: [
                 "SystemKit",
-                "TemplateKit"
+                "TemplateKit",
+                "TextToolbox",
+                "CollectionKit"
             ],
             swiftSettings: [
                 .define("DEBUG", .when(configuration: .debug)),

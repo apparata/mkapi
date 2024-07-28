@@ -40,7 +40,7 @@ public enum HTTPMethod: String {
     case trace = "TRACE"
 }
 
-extension HTTPMethod: Identifiable {
+extension HTTPMethod: Identifiable, CaseIterable {
     public var id: String {
         rawValue
     }
@@ -49,5 +49,9 @@ extension HTTPMethod: Identifiable {
 extension HTTPMethod: CustomStringConvertible {
     public var description: String {
         rawValue
+    }
+
+    var caseName: String {
+        ".\(rawValue.lowercased())"
     }
 }

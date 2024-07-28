@@ -2,29 +2,33 @@ import SwiftUI
 
 struct Sidebar: View {
 
-    @Environment(SceneModel.self) private var appModel
+    @Environment(SceneModel.self) private var sceneModel
 
     var body: some View {
-        @Bindable var appModel = appModel
-        List(selection: $appModel.selectedSidebarItem) {
+        @Bindable var sceneModel = sceneModel
+        List(selection: $sceneModel.selectedSidebarItem) {
             Section("General") {
-                SidebarItem(.General.package)
+                SidebarItem(.package)
             }
             Section("Configurations") {
-                SidebarItem(.Configuration.development)
-                    .contextMenu {
-                        Button("Delete") {
+                ForEach(sceneModel.apiModel.configurations) { configuration in
+                    SidebarItem(.configuration(configuration))
+                        .contextMenu {
+                            Button("Delete") {
 
+                            }
                         }
-                    }
+                }
             }
             Section("Requests") {
-                SidebarItem(.Request.getStuff)
-                    .contextMenu {
-                        Button("Delete") {
+                ForEach(sceneModel.apiModel.requests) { request in
+                    SidebarItem(.request(request))
+                        .contextMenu {
+                            Button("Delete") {
 
+                            }
                         }
-                    }
+                }
             }
         }
         .listStyle(.sidebar)

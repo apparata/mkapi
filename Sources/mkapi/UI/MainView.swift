@@ -16,14 +16,18 @@ struct MainView: View {
                 .navigationSplitViewColumnWidth(ideal: 230)
         } detail: {
             switch sceneModel.selectedSidebarItem {
-            case .General.package:
+            case .package:
                 PackageDetails()
+            case .configuration(let configuration):
+                ConfigurationDetails(configuration: configuration)
+            case .request(let request):
+                RequestDetails(request: request)
             default:
                 DummyDetails()
             }
         }
         .navigationTitle(sceneModel.selectedSidebarItem?.description ?? "Make API")
-        .navigationSubtitle(sceneModel.selectedSidebarItem?.subtitle ?? "Generate API code")
+        .navigationSubtitle(sceneModel.apiModel.apiName.orIfEmpty(sceneModel.apiModel.packageName).orIfEmpty(sceneModel.apiModel.repositoryName).orIfEmpty("UntitledAPI"))
         .toolbar {
             Button("Export package", systemImage: "square.and.arrow.up") {
                 sceneModel.generateAPI()

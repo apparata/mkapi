@@ -18,6 +18,6 @@ struct SidebarItem: View {
 
 #if DEBUG
 #Preview {
-    SidebarItem(.Configuration.development)
+    SidebarItem(.package)
 }
 #endif

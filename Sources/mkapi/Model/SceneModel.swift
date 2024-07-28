@@ -4,7 +4,7 @@ import SwiftUI
 
 @Observable class SceneModel {
 
-    var selectedSidebarItem: NavigationItem? = .General.package
+    var selectedSidebarItem: NavigationItem? = .package
 
     var windowIsAlwaysOnTop: Bool = false
 

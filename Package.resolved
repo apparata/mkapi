@@ -1,5 +1,5 @@
 {
-  "originHash" : "bbc614f95937d70abd82813b308218cea7f418e1066a695244c50bbc7eaaf7be",
+  "originHash" : "4910d78768f87f765042d9b2dc7edad4dd07510e80a98b70ce737df841b83b7d",
   "pins" : [
     {
       "identity" : "collectionkit",
@@ -8,15 +8,6 @@
       "state" : {
         "revision" : "4d1df096469ffce86336896d79d8fe8d5870aa24",
         "version" : "0.2.2"
-      }
-    },
-    {
-      "identity" : "constructs",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apparata/Constructs",
-      "state" : {
-        "revision" : "c64003fac2c6f33a5b9a9fead7cb73c620ac2973",
-        "version" : "1.2.0"
       }
     },
     {
