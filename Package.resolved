@@ -1,0 +1,51 @@
+{
+  "originHash" : "bbc614f95937d70abd82813b308218cea7f418e1066a695244c50bbc7eaaf7be",
+  "pins" : [
+    {
+      "identity" : "collectionkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apparata/CollectionKit",
+      "state" : {
+        "revision" : "4d1df096469ffce86336896d79d8fe8d5870aa24",
+        "version" : "0.2.2"
+      }
+    },
+    {
+      "identity" : "constructs",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apparata/Constructs",
+      "state" : {
+        "revision" : "c64003fac2c6f33a5b9a9fead7cb73c620ac2973",
+        "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "systemkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apparata/SystemKit",
+      "state" : {
+        "revision" : "f68baaf9078c2a3aa503b00fd46fbcb243617933",
+        "version" : "1.7.0"
+      }
+    },
+    {
+      "identity" : "templatekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apparata/TemplateKit.git",
+      "state" : {
+        "revision" : "82c12b9e275fc93c56315bf7def6424b7ac1d12c",
+        "version" : "0.7.2"
+      }
+    },
+    {
+      "identity" : "texttoolbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apparata/TextToolbox",
+      "state" : {
+        "revision" : "e07cd04405fcd0f315961cfc6ea427a609f6452d",
+        "version" : "1.2.0"
+      }
+    }
+  ],
+  "version" : 3
+}
