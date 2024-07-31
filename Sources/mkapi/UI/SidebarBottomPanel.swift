@@ -30,14 +30,20 @@ struct SidebarBottomPanel: View {
                         .font(.system(size: 15))
                 }
                 .buttonStyle(.plain)
-                /*
-                Toggle(isOn: $appModel.windowIsAlwaysOnTop) {
-                    Text("Always on top")
-                        .foregroundStyle(Color.secondary)
-                }*/
                 Spacer()
             }
             .padding(8)
+            Divider()
+                .padding(.bottom, 16)
+            DropArea()
+            HStack {
+                Toggle(isOn: $appModel.windowIsAlwaysOnTop) {
+                    Text("Always on top")
+                        .foregroundStyle(Color.secondary)
+                }
+                .padding()
+                Spacer()
+            }
         }
         .frame(maxWidth: .infinity)
         .sheet(isPresented: $isPresentingNewConfigurationSheet) {

@@ -4,7 +4,7 @@
 
 import Foundation
 
-public enum HTTPMethod: String {
+public enum HTTPMethod: String, Codable {
 
     /// The `DELETE` method deletes the specified resource.
     case delete = "DELETE"

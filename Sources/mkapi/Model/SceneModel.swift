@@ -25,4 +25,19 @@ import SwiftUI
             }
         }
     }
+
+    func makeDocument() -> APIModelDocument {
+        return APIModelDocument(apiModel)
+    }
+
+    func importAPIModel(_ apiModel: APIModel) {
+        self.apiModel = apiModel
+        selectedSidebarItem = .package
+    }
+
+
+    func showError(_ error: Swift.Error) {
+        self.error = error
+        self.isShowingError = true
+    }
 }
