@@ -11,6 +11,8 @@ extension Template.API {
 //  Copyright © <{ copyrightYear }> <{ copyrightHolder }>. All rights reserved.
 //
 
+import Foundation
+
 public enum MIMEContentType {
 
     case text

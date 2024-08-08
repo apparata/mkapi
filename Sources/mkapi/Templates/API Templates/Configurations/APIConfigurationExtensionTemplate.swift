@@ -18,15 +18,6 @@ extension Template.API {
 
 import Foundation
 
-public struct <{ apiName }>Configuration {
-
-    public let baseURL: URL
-
-    init(baseURL: URL) {
-        self.baseURL = baseURL
-    }
-}
-
 extension <{ apiName }>Configuration {
 
     // MARK: - <{ title }>

@@ -1,4 +1,5 @@
 import SwiftUI
+import TextToolbox
 
 struct RequestDetails: View {
 
@@ -16,10 +17,10 @@ struct RequestDetails: View {
                     TextField("Function Name", text: $request.functionName, prompt: Text("exampleRequest"))
                 }
                 Section("Description") {
-                    TextField("Function Comment", text: $request.functionComment, prompt: Text("Example description"))
+                    TextField("Function Comment", text: $request.functionComment, prompt: Text(request.title))
                 }
                 Section("Endpoint") {
-                    TextField("Path", text: $request.endpointPath, prompt: Text("/example"))
+                    TextField("Path", text: $request.endpointPath, prompt: Text("/\(request.functionName)"))
                     Picker("HTTP Method", selection: $request.method) {
                         ForEach(HTTPMethod.allCases) { method in
                             Text(method.description)
@@ -42,7 +43,7 @@ struct RequestDetails: View {
                 }
 
                 Section("Response") {
-                    TextField("Type Name", text: $request.responseName, prompt: Text("ExampleResponse"))
+                    TextField("Type Name", text: $request.responseName, prompt: Text("\(request.functionName.capitalizingFirstLetter())Response"))
                 }
             }
             .formStyle(.grouped)

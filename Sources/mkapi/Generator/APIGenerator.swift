@@ -4,11 +4,12 @@ import OSLog
 import TemplateKit
 import SystemKit
 import TextToolbox
+import CollectionKit
 
 class APIGenerator {
     func generateAPI(for apiModel: APIModel) throws {
 
-        let copyrightHolder = apiModel.copyrightHolder.orIfEmpty("Unknown, Inc.")
+        let copyrightHolder = apiModel.copyrightHolder.orIfEmpty("Unknown, Inc")
         let copyrightYear = apiModel.copyrightYear.orIfEmpty(String(Date.currentYear))
         let apiName = apiModel.apiName.orIfEmpty("UntitledAPI")
 
@@ -61,7 +62,7 @@ class APIGenerator {
         /// LICENSE
         try render(.Package.License.bsdZeroClause, to: "LICENSE", in: packagePath, context: [
             "copyrightYear": copyrightYear,
-            "copyrightHolder": copyrightHolder,
+            "copyrightHolder": copyrightHolder
         ])
 
         Logger.apiGenerator.trace("Generating .gitignore")
@@ -141,16 +142,30 @@ class APIGenerator {
             "loggerCategory": loggerCategory
         ])
 
+        Logger.apiGenerator.trace("Generating FormContent")
+        // Sources/<apiName>/Helpers/FormContent.swift
+        try render(.API.formContent, to: "FormContent.swift", in: helpersPath, context: [
+            "copyrightYear": copyrightYear,
+            "copyrightHolder": copyrightHolder
+        ])
+
         Logger.apiGenerator.trace("Generating HTTPMethod")
         // Sources/<apiName>/Helpers/HTTPMethod.swift
         try render(.API.httpMethod, to: "HTTPMethod.swift", in: helpersPath, context: [
             "copyrightYear": copyrightYear,
-            "copyrightHolder": copyrightHolder,
+            "copyrightHolder": copyrightHolder
         ])
 
         Logger.apiGenerator.trace("Generating MIMEContentType")
         // Sources/<apiName>/Helpers/MIMEContentType.swift
         try render(.API.mimeContentType, to: "MIMEContentType.swift", in: helpersPath, context: [
+            "copyrightYear": copyrightYear,
+            "copyrightHolder": copyrightHolder
+        ])
+
+        Logger.apiGenerator.trace("Generating MultipartContent")
+        // Sources/<apiName>/Helpers/MultipartContent.swift
+        try render(.API.multipartContent, to: "MultipartContent.swift", in: helpersPath, context: [
             "copyrightYear": copyrightYear,
             "copyrightHolder": copyrightHolder,
         ])
@@ -169,8 +184,13 @@ class APIGenerator {
             ])
         }
 
+        var responses = apiModel.responses
+
         Logger.apiGenerator.trace("Generating requests")
         for request in apiModel.requests {
+            
+            let responseName = request.responseName.orIfEmpty("\(request.functionName.capitalizingFirstLetter())Response")
+
             // Sources/<apiName>/Requests/<apiName>+<functionName>.swift
             try render(.API.request, to: "\(apiName)+\(request.functionName.capitalizingFirstLetter()).swift", in: requestsPath, context: [
                 "copyrightYear": copyrightYear,
@@ -181,17 +201,25 @@ class APIGenerator {
                 "functionName": request.functionName,
                 "httpMethod": request.method.caseName,
                 "path": request.endpointPath.orIfEmpty("/\(request.functionName)"),
-                "body": nil, //request.body,
-                "query": "[:]", //request.query,
-                "headers": "[:]", //request.headers,
-                "responseName": request.responseName
+                "body": "nil", //request.body,
+                "query": "[]", //request.query,
+                "headers": "[]", //request.headers,
+                "responseName": responseName
             ])
+
+            if responses.containsNone(where: { $0.responseName == responseName }) {
+                responses.append(ResponseModel(responseName: responseName))
+            }
         }
 
         Logger.apiGenerator.trace("Generating responses")
-        for response in apiModel.responses {
+        for response in responses {
             // Sources/<apiName>/Responses/<responseName>.swift
-            try render(.API.response, to: "\(response.responseName).swift", in: responsesPath, context: [:])
+            try render(.API.response, to: "\(response.responseName).swift", in: responsesPath, context: [
+                "copyrightYear": copyrightYear,
+                "copyrightHolder": copyrightHolder,
+                "responseName": response.responseName
+            ])
         }
 
         NSWorkspace.shared.open(outputPath.url)

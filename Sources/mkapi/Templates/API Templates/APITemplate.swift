@@ -44,8 +44,8 @@ public class <{ apiName }> {
         _ path: String,
         body: Codable? = nil,
         encoder: JSONEncoder = JSONEncoder(),
-        query: [String: String?] = [:],
-        headers: [String: String?] = [:]
+        query: [(String, String?)] = [],
+        headers: [(String, String?)] = []
     ) throws -> (URLRequest, id: Int) {
         try requestBuilder.makeRequest(
             baseURL: configuration.baseURL,

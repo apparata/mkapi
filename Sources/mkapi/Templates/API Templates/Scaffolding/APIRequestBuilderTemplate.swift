@@ -21,8 +21,8 @@ public protocol <{ apiName }>RequestBuilder {
         path: String,
         body: Codable?,
         encoder: JSONEncoder,
-        query: [String: String?],
-        headers: [String: String?],
+        query: [(String, String?)],
+        headers: [(String, String?)],
         authorizeRequest: (URLRequest) throws -> URLRequest
     ) throws -> (URLRequest, id: Int)
 }
@@ -49,13 +49,13 @@ public class Default<{ apiName }>RequestBuilder: <{ apiName }>RequestBuilder {
         path: String,
         body: Codable?,
         encoder: JSONEncoder,
-        query: [String: String?],
-        headers: [String: String?],
+        query: [(String, String?)],
+        headers: [(String, String?)],
         authorizeRequest: (URLRequest) throws -> URLRequest
     ) throws -> (URLRequest, id: Int) {
 
         let queryItems = query.map {
-            URLQueryItem(name: $0, value: $1)
+            URLQueryItem(name: $0.0, value: $0.1)
         }
 
         let url = try assembleURL(
