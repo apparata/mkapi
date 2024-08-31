@@ -46,8 +46,8 @@ public class Default<{ apiName }>RequestPerformer: <{ apiName }>RequestPerformer
         logger?.logRequest(request, id: id)
         let (data, response) = try await urlSession.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
-            logger?.logError(UntitledAPIError.invalidHTTPResponse, id: id)
-            throw UntitledAPIError.invalidHTTPResponse
+            logger?.logError(<{ apiName }>Error.invalidHTTPResponse, id: id)
+            throw <{ apiName }>Error.invalidHTTPResponse
         }
         logger?.logResponse(httpResponse, body: data, id: id)
         return (data, httpResponse)

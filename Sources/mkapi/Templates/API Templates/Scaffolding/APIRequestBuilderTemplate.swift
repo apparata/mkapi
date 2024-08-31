@@ -101,7 +101,7 @@ public class Default<{ apiName }>RequestBuilder: <{ apiName }>RequestBuilder {
             components.path = baseURL.appendingPathComponent(path).path
             components.queryItems = queryItems
             guard let assembledURL = components.url else {
-                throw UntitledAPIError.invalidURL
+                throw <{ apiName }>Error.invalidURL
             }
             return assembledURL
         }
