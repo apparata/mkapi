@@ -28,7 +28,7 @@ extension <{ apiName }> {
     // MARK: - <{ markComment }>
 
     /// <{ functionComment }>
-    func <{ functionName }>() async throws -> <{ responseName }> {
+    public func <{ functionName }>() async throws -> <{ responseName }> {
 
         let (request, id) = try makeRequest(
             <{ httpMethod }>,
